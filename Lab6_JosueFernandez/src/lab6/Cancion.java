@@ -2,14 +2,14 @@ package lab6;
 
 public class Cancion {
     private String nombre;
-    private int puntiacion;
+    private int puntuacion;
     private int añoPublicacion;
     private String artista;
     private String album;
 
-    public Cancion(String nombre, int puntiacion, int añoPublicacion, String artista, String album) {
+    public Cancion(String nombre, int puntuacion, int añoPublicacion, String artista, String album) {
         this.nombre = nombre;
-        this.puntiacion = puntiacion;
+        this.puntuacion = puntuacion;
         this.añoPublicacion = añoPublicacion;
         this.artista = artista;
         this.album = album;
@@ -31,12 +31,12 @@ public class Cancion {
         this.nombre = nombre;
     }
 
-    public int getPuntiacion() {
-        return puntiacion;
+    public int getPuntuacion() {
+        return puntuacion;
     }
 
-    public void setPuntiacion(int puntiacion) {
-        this.puntiacion = puntiacion;
+    public void setPuntuacion(int puntuacion) {
+        this.puntuacion = puntuacion;
     }
 
     public int getAñoPublicacion() {
