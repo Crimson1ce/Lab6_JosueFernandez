@@ -49,7 +49,7 @@ public class Playlist {
             FileWriter fw = new FileWriter(archivo, false);
             BufferedWriter bw = new BufferedWriter(fw);
             
-            for (Cancion can : getCanciones()) {
+            for (Cancion can : canciones) {
                 
                 bw.write(can.getNombre()+"|");
                 bw.write(can.getPuntuacion()+"|");
