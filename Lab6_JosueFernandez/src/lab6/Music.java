@@ -29,7 +29,7 @@ public class Music extends javax.swing.JFrame {
     public Music() {
         initComponents();
         this.setLocationRelativeTo(null);
-        
+
         bt_guardarCambios.setVisible(false);
     }
 
@@ -338,6 +338,11 @@ public class Music extends javax.swing.JFrame {
         });
 
         bt_guardarCambios.setText("Guardar Cambios");
+        bt_guardarCambios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bt_guardarCambiosActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -616,6 +621,7 @@ public class Music extends javax.swing.JFrame {
             if (seleccion == JFileChooser.APPROVE_OPTION) {
                 fichero = jfc.getSelectedFile();
 
+                selectedFile = fichero;
                 Playlist p = new Playlist(fichero);
                 DefaultTableModel model = (DefaultTableModel) jtb_playlist.getModel();
 
@@ -754,6 +760,33 @@ public class Music extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_bt_modificarCancionActionPerformed
 
+    private void bt_guardarCambiosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_guardarCambiosActionPerformed
+        try {
+            Playlist p = new Playlist(selectedFile);
+            for (int i = p.getCanciones().size() - 1; i >= 0; i--) {
+                p.getCanciones().remove(i);
+            }
+
+            DefaultTableModel model = (DefaultTableModel) jtb_playlist.getModel();
+
+            for (int i = 0; i < model.getRowCount(); i++) {
+                p.getCanciones().add((Cancion) model.getValueAt(i, 0));
+            }
+
+            p.escribirArchivo(selectedFile.getPath());
+
+            JOptionPane.showMessageDialog(this, "Se han guardado los cambios de la playlist.", "Guardado.", JOptionPane.INFORMATION_MESSAGE);
+            for (int i = model.getRowCount() - 1; i >= 0; i--) {
+                model.removeRow(i);
+            }
+            bt_guardarCambios.setVisible(false);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Ha ocurrido un error al guardar la playlist.", "Error.", JOptionPane.ERROR_MESSAGE);
+        }
+
+
+    }//GEN-LAST:event_bt_guardarCambiosActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -829,4 +862,7 @@ public class Music extends javax.swing.JFrame {
     private javax.swing.JTextField tf_artista;
     private javax.swing.JTextField tf_nombreCancion;
     // End of variables declaration//GEN-END:variables
+
+    File selectedFile;
+
 }

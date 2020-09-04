@@ -78,18 +78,21 @@ public class Playlist {
             try {
                 Scanner sc = new Scanner(archivo);
                 
-                sc.useDelimiter("|");
-                
                 canciones.clear();
-                while(sc.hasNext()){
+                int i=0;
+                while(sc.hasNextLine()){
+                    
+                    String line = sc.nextLine();
+                    String[] palabras = line.split("\\|");
+                    
                     
                     canciones.add(
                             new Cancion(
-                                    sc.nextLine(),
-                                    sc.nextInt(),
-                                    sc.nextInt(),
-                                    sc.nextLine(),
-                                    sc.nextLine()
+                                    palabras[0],
+                                    Integer.parseInt(palabras[1]),
+                                    Integer.parseInt(palabras[2]),
+                                    palabras[3],
+                                    palabras[4]
                             )
                     );
                     
